@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  gowebapi:
+    build:
+      context: ./webapi
+      dockerfile: Dockerfile
+    expose: 
+      - "8000"
+  reverseproxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports: 
+      - "80:80"
+    links:
+      - gowebapi
